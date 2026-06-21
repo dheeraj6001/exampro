@@ -1,0 +1,145 @@
+/* =====================================================
+   EXAMFLOW – inspired by ThinkExam / Pesofts / ConductExam
+   ===================================================== */
+
+:root {
+  --navy:   #0b1437;
+  --navy2:  #111b47;
+  --blue:   #1a56db;
+  --blue-lt:#3b82f6;
+  --green:  #16a34a;
+  --green-lt:#22c55e;
+  --cyan:   #06b6d4;
+  --white:  #ffffff;
+  --light:  #f0f4ff;
+  --muted:  #64748b;
+  --border: #e2e8f0;
+  --text:   #1e293b;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(0,0,0,.08);
+}
+
+body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); }
+
+/* ---- NAVBAR ---- */
+.site-navbar {
+  background: var(--navy) !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,.3);
+}
+.site-navbar .navbar-brand { color: #fff !important; font-size: 1.5rem; font-weight: 800; letter-spacing: -.5px; }
+.site-navbar .navbar-brand span { color: var(--cyan); }
+.site-navbar .nav-link { color: rgba(255,255,255,.82) !important; font-weight: 500; font-size: .9rem; padding: .75rem 1rem !important; transition: color .2s; }
+.site-navbar .nav-link:hover, .site-navbar .nav-link.active { color: #fff !important; }
+.site-navbar .navbar-toggler { border-color: rgba(255,255,255,.3); }
+.site-navbar .navbar-toggler-icon { filter: invert(1); }
+.btn-demo { background: var(--green) !important; color: #fff !important; font-weight: 600 !important; border-radius: 6px !important; padding: .45rem 1.25rem !important; border: none !important; font-size: .9rem !important; }
+.btn-demo:hover { background: var(--green-lt) !important; }
+
+/* ---- HERO ---- */
+.hero-section {
+  background: linear-gradient(120deg, #060d2e 0%, #0b1437 50%, #0e1f5b 100%);
+  position: relative; overflow: hidden;
+}
+.hero-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(26,86,219,.25) 0%, transparent 60%);
+}
+.hero-badge { background: rgba(6,182,212,.15); color: var(--cyan); border: 1px solid rgba(6,182,212,.3); border-radius: 20px; font-size: .8rem; font-weight: 600; display: inline-block; padding: .35rem 1rem; }
+.hero-section h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; line-height: 1.15; color: #fff; }
+.hero-section h1 .highlight { color: var(--cyan); }
+.hero-bullets li { color: rgba(255,255,255,.8); font-size: .95rem; margin-bottom: .4rem; }
+.hero-bullets li::marker { color: var(--cyan); }
+.hero-mock {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px; backdrop-filter: blur(4px);
+  padding: 24px; min-height: 300px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.mock-bar { background: rgba(255,255,255,.08); border-radius: 6px; height: 14px; }
+.mock-bar.w80 { width: 80%; }
+.mock-bar.w60 { width: 60%; }
+.mock-bar.w90 { width: 90%; }
+.mock-stat { background: rgba(6,182,212,.12); border: 1px solid rgba(6,182,212,.2); border-radius: 8px; padding: 14px 18px; }
+.mock-stat .num { font-size: 1.6rem; font-weight: 800; color: var(--cyan); }
+.mock-stat .lbl { font-size: .75rem; color: rgba(255,255,255,.6); }
+
+/* ---- LOGO STRIP ---- */
+.logo-strip { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.logo-strip .label { color: var(--muted); font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.client-logo { font-size: .82rem; font-weight: 700; color: #94a3b8; letter-spacing: .5px; text-transform: uppercase; padding: 6px 20px; border: 1px solid #e2e8f0; border-radius: 6px; white-space: nowrap; }
+
+/* ---- STATS ---- */
+.stats-section { background: var(--white); }
+.stat-box { text-align: center; padding: 28px 20px; border-right: 1px solid var(--border); }
+.stat-box:last-child { border-right: none; }
+.stat-box .num { font-size: 2.6rem; font-weight: 800; color: var(--blue); line-height: 1; }
+.stat-box .plus { color: var(--green); }
+.stat-box .lbl { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+
+/* ---- FEATURES ---- */
+.feature-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; height: 100%; background: var(--white); transition: transform .2s, box-shadow .2s, border-color .2s; }
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--blue-lt); }
+.feature-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px; }
+.icon-blue   { background: #dbeafe; }
+.icon-green  { background: #dcfce7; }
+.icon-cyan   { background: #cffafe; }
+.icon-violet { background: #ede9fe; }
+.icon-orange { background: #ffedd5; }
+.icon-rose   { background: #ffe4e6; }
+.feature-card h5 { font-weight: 700; font-size: 1rem; margin-bottom: 8px; color: var(--text); }
+.feature-card p { font-size: .875rem; color: var(--muted); margin: 0; }
+
+/* ---- HOW IT WORKS ---- */
+.steps-section { background: var(--light); }
+.step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-connector { width: 2px; background: #bfdbfe; margin: 0 auto; height: 40px; }
+
+/* ---- TESTIMONIALS ---- */
+.testi-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; height: 100%; }
+.testi-card .stars { color: #f59e0b; font-size: 1rem; margin-bottom: 14px; }
+.testi-card .quote { font-size: .9rem; color: var(--text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.testi-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; flex-shrink: 0; }
+.testi-card .name { font-weight: 700; font-size: .9rem; color: var(--text); }
+.testi-card .org { font-size: .8rem; color: var(--muted); }
+
+/* ---- PRICING ---- */
+.price-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; height: 100%; background: var(--white); }
+.price-card.featured { border: 2px solid var(--blue); background: #f0f4ff; }
+.price-card .plan-name { font-weight: 700; font-size: .9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.price-card .price { font-size: 2.6rem; font-weight: 800; color: var(--text); line-height: 1.1; }
+.price-card .price small { font-size: 1rem; font-weight: 400; color: var(--muted); }
+.price-card ul li { font-size: .875rem; padding: 6px 0; border-bottom: 1px solid var(--border); color: var(--text); }
+.price-card ul li:last-child { border: none; }
+.price-card ul li i { color: var(--green); }
+.price-card ul li.na { color: var(--muted); text-decoration: line-through; }
+.price-card ul li.na i { color: #cbd5e1; }
+
+/* ---- PAGE HEADER ---- */
+.page-hero { background: linear-gradient(120deg, #060d2e, #0b1437, #0e1f5b); }
+
+/* ---- CTA BANNER ---- */
+.cta-banner { background: linear-gradient(135deg, #1a56db, #0e1f5b); }
+
+/* ---- FOOTER ---- */
+.site-footer { background: #060d2e; }
+.site-footer a { color: #94a3b8; font-size: .875rem; text-decoration: none; transition: color .2s; }
+.site-footer a:hover { color: #fff; }
+.footer-logo span { color: var(--cyan); }
+
+/* ---- UTILS ---- */
+.section-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--blue); margin-bottom: 10px; display: block; }
+.section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--text); line-height: 1.2; }
+.section-sub { color: var(--muted); font-size: 1rem; max-width: 560px; }
+.btn-primary-custom { background: var(--blue); color: #fff; border: none; padding: .7rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: .95rem; transition: background .2s, transform .15s; display: inline-block; }
+.btn-primary-custom:hover { background: #1e40af; transform: translateY(-1px); color: #fff; }
+.btn-outline-custom { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); padding: .65rem 1.7rem; border-radius: 8px; font-weight: 600; font-size: .95rem; transition: .2s; display: inline-block; }
+.btn-outline-custom:hover { border-color: #fff; background: rgba(255,255,255,.08); color: #fff; }
+
+@media (max-width: 768px) {
+  .stat-box { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-box:last-child { border-bottom: none; }
+  .step-connector { display: none; }
+}
