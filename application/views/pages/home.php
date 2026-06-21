@@ -67,7 +67,6 @@
       <span class="client-logo">ICAI</span>
       <span class="client-logo">NASSCOM</span>
       <span class="client-logo">FSSAI</span>
-      <span class="client-logo">KD Campus</span>
       <span class="client-logo">Gate Academy</span>
       <span class="client-logo">SSC Prep</span>
       <span class="client-logo">Univ. Hub</span>

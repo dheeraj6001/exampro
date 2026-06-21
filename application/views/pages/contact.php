@@ -30,16 +30,16 @@
           <div class="feature-icon icon-blue mb-0 flex-shrink-0"><i class="bi bi-envelope text-primary fs-5"></i></div>
           <div>
             <div class="fw-semibold small">Email Us</div>
-            <div class="text-muted small">sales@examflow.com</div>
-            <div class="text-muted small">support@examflow.com</div>
+            <div class="text-muted small">info@examrankers.com</div>
+            <div class="text-muted small">support@examrankers.com</div>
           </div>
         </div>
         <div class="d-flex gap-3 mb-4 p-3 rounded-3 border">
           <div class="feature-icon icon-green mb-0 flex-shrink-0"><i class="bi bi-telephone text-success fs-5"></i></div>
           <div>
             <div class="fw-semibold small">Call Us</div>
-            <div class="text-muted small">+91 98765 43210 (Sales)</div>
-            <div class="text-muted small">+91 98765 43211 (Support)</div>
+            <div class="text-muted small">+91 8874 954655 (Sales)</div>
+            <div class="text-muted small">+91 8874 954655 (Support)</div>
           </div>
         </div>
         <div class="d-flex gap-3 mb-4 p-3 rounded-3 border">
@@ -57,7 +57,7 @@
             <span class="client-logo" style="font-size:.72rem;padding:4px 12px;">ICAI</span>
             <span class="client-logo" style="font-size:.72rem;padding:4px 12px;">NASSCOM</span>
             <span class="client-logo" style="font-size:.72rem;padding:4px 12px;">FSSAI</span>
-            <span class="client-logo" style="font-size:.72rem;padding:4px 12px;">KD Campus</span>
+            <span class="client-logo" style="font-size:.72rem;padding:4px 12px;">JEE ACADEMY</span>
           </div>
         </div>
       </div>
@@ -83,18 +83,18 @@
             <div class="row g-3 mb-3">
               <div class="col-sm-6">
                 <label class="form-label fw-semibold small">First Name <span class="text-danger">*</span></label>
-                <input type="text" name="first_name" id="first_name" class="form-control" required placeholder="Arjun">
+                <input type="text" name="first_name" id="first_name" class="form-control" required placeholder="First Name">
               </div>
               <div class="col-sm-6">
                 <label class="form-label fw-semibold small">Last Name <span class="text-danger">*</span></label>
-                <input type="text" name="last_name" id="last_name" class="form-control" required placeholder="Mehta">
+                <input type="text" name="last_name" id="last_name" class="form-control" required placeholder="Last Name">
               </div>
             </div>
 
             <div class="row g-3 mb-3">
               <div class="col-sm-6">
                 <label class="form-label fw-semibold small">Work Email <span class="text-danger">*</span></label>
-                <input type="email" name="email" id="email" class="form-control" required placeholder="arjun@yourorg.com">
+                <input type="email" name="email" id="email" class="form-control" required placeholder="user@gmail.com">
               </div>
               <div class="col-sm-6">
                 <label class="form-label fw-semibold small">Phone Number <span class="text-danger">*</span></label>
@@ -105,7 +105,7 @@
             <div class="row g-3 mb-3">
               <div class="col-sm-6">
                 <label class="form-label fw-semibold small">Organisation Name <span class="text-danger">*</span></label>
-                <input type="text" name="org" id="org" class="form-control" required placeholder="EduVision Academy">
+                <input type="text" name="org" id="org" class="form-control" required placeholder="JEE Academy">
               </div>
               <div class="col-sm-6">
                 <label class="form-label fw-semibold small">Organisation Type</label>
