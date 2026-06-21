@@ -5,15 +5,17 @@ class Blog_model extends CI_Model {
 
     private $table = 'er_blog_posts';
 
-    public function get_all($status = null, $limit = null, $offset = 0) {
-        if ($status) $this->db->where('status', $status);
+    public function get_all($status = null, $limit = null, $offset = 0, $category = null) {
+        if ($status)   $this->db->where('status', $status);
+        if ($category) $this->db->where('category', $category);
         $this->db->order_by('created_at', 'DESC');
-        if ($limit) $this->db->limit($limit, $offset);
+        if ($limit)    $this->db->limit($limit, $offset);
         return $this->db->get($this->table)->result();
     }
 
-    public function count_all($status = null) {
-        if ($status) $this->db->where('status', $status);
+    public function count_all($status = null, $category = null) {
+        if ($status)   $this->db->where('status', $status);
+        if ($category) $this->db->where('category', $category);
         return $this->db->count_all_results($this->table);
     }
 
@@ -23,6 +25,13 @@ class Blog_model extends CI_Model {
 
     public function get_by_slug($slug) {
         return $this->db->get_where($this->table, ['slug' => $slug, 'status' => 'published'])->row();
+    }
+
+    public function get_categories() {
+        $this->db->distinct();
+        $this->db->select('category');
+        $this->db->where('status', 'published');
+        return $this->db->get($this->table)->result();
     }
 
     public function insert($data) {

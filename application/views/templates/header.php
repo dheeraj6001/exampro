@@ -20,10 +20,12 @@
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav mx-auto gap-1">
         <li class="nav-item"><a class="nav-link" href="<?= base_url() ?>">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?= base_url('services') ?>">Features</a></li>
         <li class="nav-item"><a class="nav-link" href="<?= base_url('about') ?>">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('services') ?>">Features</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('pricing') ?>">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('case-studies') ?>">Case Studies</a></li>
         <li class="nav-item"><a class="nav-link" href="<?= base_url('blog') ?>">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="<?= base_url('contact') ?>">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('contact') ?>">Contact Us</a></li>
       </ul>
       <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
         <a href="#" class="nav-link text-white-50 fw-medium" style="font-size:.9rem;">Login</a>

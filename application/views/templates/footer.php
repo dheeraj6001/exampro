@@ -38,12 +38,12 @@
       <div class="col-6 col-md-4 col-lg-2">
         <h6 class="text-white fw-semibold mb-3 small text-uppercase" style="letter-spacing:1px;">Use Cases</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="#">Coaching Institutes</a></li>
-          <li class="mb-2"><a href="#">Universities</a></li>
-          <li class="mb-2"><a href="#">Corporate L&D</a></li>
-          <li class="mb-2"><a href="#">Government Exams</a></li>
-          <li class="mb-2"><a href="#">Recruitment</a></li>
-          <li class="mb-2"><a href="#">CBT Centres</a></li>
+          <li class="mb-2"><a href="<?= base_url('use-cases/coaching') ?>">Coaching Institutes</a></li>
+          <li class="mb-2"><a href="<?= base_url('use-cases/universities') ?>">Universities</a></li>
+          <li class="mb-2"><a href="<?= base_url('use-cases/corporate') ?>">Corporate L&D</a></li>
+          <li class="mb-2"><a href="<?= base_url('use-cases/government') ?>">Government Exams</a></li>
+          <li class="mb-2"><a href="<?= base_url('use-cases/recruitment') ?>">Recruitment</a></li>
+          <li class="mb-2"><a href="<?= base_url('use-cases/cbt') ?>">CBT Centres</a></li>
         </ul>
       </div>
 
@@ -51,9 +51,9 @@
         <h6 class="text-white fw-semibold mb-3 small text-uppercase" style="letter-spacing:1px;">Company</h6>
         <ul class="list-unstyled">
           <li class="mb-2"><a href="<?= base_url('about') ?>">About Us</a></li>
-          <li class="mb-2"><a href="#">Careers</a></li>
-          <li class="mb-2"><a href="#">Blog</a></li>
-          <li class="mb-2"><a href="#">Case Studies</a></li>
+          <li class="mb-2"><a href="<?= base_url('pricing') ?>">Pricing</a></li>
+          <li class="mb-2"><a href="<?= base_url('blog') ?>">Blog</a></li>
+          <li class="mb-2"><a href="<?= base_url('case-studies') ?>">Case Studies</a></li>
           <li class="mb-2"><a href="<?= base_url('contact') ?>">Contact</a></li>
         </ul>
       </div>
@@ -61,12 +61,12 @@
       <div class="col-6 col-lg-2">
         <h6 class="text-white fw-semibold mb-3 small text-uppercase" style="letter-spacing:1px;">Support</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="#">Help Centre</a></li>
-          <li class="mb-2"><a href="#">Documentation</a></li>
-          <li class="mb-2"><a href="#">API Docs</a></li>
-          <li class="mb-2"><a href="#">System Status</a></li>
-          <li class="mb-2"><a href="#">Privacy Policy</a></li>
-          <li class="mb-2"><a href="#">Terms of Use</a></li>
+          <li class="mb-2"><a href="<?= base_url('help') ?>">Help Centre</a></li>
+          <li class="mb-2"><a href="<?= base_url('docs') ?>">Documentation</a></li>
+          <li class="mb-2"><a href="<?= base_url('api-docs') ?>">API Docs</a></li>
+          <li class="mb-2"><a href="<?= base_url('status') ?>">System Status</a></li>
+          <li class="mb-2"><a href="<?= base_url('privacy-policy') ?>">Privacy Policy</a></li>
+          <li class="mb-2"><a href="<?= base_url('terms') ?>">Terms of Use</a></li>
         </ul>
       </div>
 

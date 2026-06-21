@@ -53,10 +53,19 @@ $route['default_controller'] = 'pages';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['about']    = 'pages/about';
-$route['services'] = 'pages/services';
-$route['contact']  = 'pages/contact';
-$route['contact/send'] = 'contact/send';
+$route['about']                  = 'pages/about';
+$route['services']               = 'pages/services';
+$route['pricing']                = 'pages/pricing';
+$route['case-studies']           = 'pages/case_studies';
+$route['privacy-policy']         = 'pages/privacy_policy';
+$route['terms']                  = 'pages/terms';
+$route['help']                   = 'pages/help';
+$route['docs']                   = 'pages/docs';
+$route['api-docs']               = 'pages/api_docs';
+$route['status']                 = 'pages/status';
+$route['use-cases/(:any)']       = 'pages/use_case/$1';
+$route['contact']                = 'pages/contact';
+$route['contact/send']           = 'contact/send';
 
 // ---- REST API ----
 // Auth
