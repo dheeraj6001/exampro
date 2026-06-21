@@ -37,6 +37,48 @@ class Pages extends CI_Controller {
         $this->_render('contact', $data);
     }
 
+    public function psychometric()
+    {
+        $data['page_title'] = 'Psychometric Assessments';
+        $data['meta_desc']  = 'Scientifically validated psychometric assessments — personality, cognitive ability, emotional intelligence, and situational judgement. Hire and develop with confidence.';
+        $this->_render('psychometric', $data);
+    }
+
+    public function ai_proctoring()
+    {
+        $data['page_title'] = 'AI Proctoring';
+        $data['meta_desc']  = 'Catch cheating without punishing honest students. AI-powered proctoring with webcam monitoring, browser lockdown, and behavioural analysis.';
+        $this->_render('ai_proctoring', $data);
+    }
+
+    public function question_bank()
+    {
+        $data['page_title'] = 'Question Bank';
+        $data['meta_desc']  = 'Build, organise, and reuse a smart question bank. Tag by subject, chapter, difficulty, and type. Import from Excel. Power intelligent randomisation.';
+        $this->_render('question_bank', $data);
+    }
+
+    public function live_exams()
+    {
+        $data['page_title'] = 'Live Exams';
+        $data['meta_desc']  = 'Conduct live online exams for thousands of simultaneous candidates. Auto-scaling, browser lockdown, real-time monitoring, and instant results.';
+        $this->_render('live_exams', $data);
+    }
+
+    public function certificates()
+    {
+        $data['page_title'] = 'Digital Certificates';
+        $data['meta_desc']  = 'Auto-generate QR-verified digital certificates instantly after exam results. Branded, tamper-proof, and shareable on LinkedIn.';
+        $this->_render('certificates', $data);
+    }
+
+    public function analytics()
+    {
+        $data['page_title'] = 'Analytics & Reporting';
+        $data['meta_desc']  = 'Deep exam analytics — rank lists, topic-wise performance, cohort trends, and one-click data export. Turn exam data into actionable insight.';
+        $this->_render('analytics', $data);
+    }
+
     public function use_case($slug = '')
     {
         $cases = $this->_use_cases();

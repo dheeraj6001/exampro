@@ -26,12 +26,13 @@
       <div class="col-6 col-md-4 col-lg-2">
         <h6 class="text-white fw-semibold mb-3 small text-uppercase" style="letter-spacing:1px;">Product</h6>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="<?= base_url('services') ?>">AI Proctoring</a></li>
-          <li class="mb-2"><a href="<?= base_url('services') ?>">Question Bank</a></li>
-          <li class="mb-2"><a href="<?= base_url('services') ?>">Live Exams</a></li>
-          <li class="mb-2"><a href="<?= base_url('services') ?>">Analytics</a></li>
+          <li class="mb-2"><a href="<?= base_url('ai-proctoring') ?>">AI Proctoring</a></li>
+          <li class="mb-2"><a href="<?= base_url('question-bank') ?>">Question Bank</a></li>
+          <li class="mb-2"><a href="<?= base_url('live-exams') ?>">Live Exams</a></li>
+          <li class="mb-2"><a href="<?= base_url('analytics') ?>">Analytics</a></li>
           <li class="mb-2"><a href="<?= base_url('services') ?>">White-label</a></li>
-          <li class="mb-2"><a href="<?= base_url('services') ?>">Certificates</a></li>
+          <li class="mb-2"><a href="<?= base_url('certificates') ?>">Certificates</a></li>
+          <li class="mb-2"><a href="<?= base_url('psychometric') ?>">Psychometric</a></li>
         </ul>
       </div>
 
