@@ -75,7 +75,6 @@ $route['contact/send']           = 'contact/send';
 
 // ---- REST API ----
 // Auth
-$route['api/auth/login']   = 'api/auth_login';
 $route['api/auth/logout']  = 'api/auth_logout';
 $route['api/auth/me']      = 'api/auth_me';
 
@@ -86,20 +85,8 @@ $route['api/testimonials']        = 'api/testimonials_index';
 $route['api/faqs']                = 'api/faqs_index';
 $route['api/settings']            = 'api/settings_index';
 
-// Admin — blog
-$route['api/admin/blog']          = 'api/admin_blog_list';       // GET list / POST create
-$route['api/admin/blog/(:num)']   = 'api/admin_blog_single/$1';  // GET / PUT / DELETE
-
-// Admin — testimonials
-$route['api/admin/testimonials']         = 'api/admin_testimonials_list';
-$route['api/admin/testimonials/(:num)']  = 'api/admin_testimonials_single/$1';
-
-// Admin — faqs
-$route['api/admin/faqs']                 = 'api/admin_faqs_list';
-$route['api/admin/faqs/(:num)']          = 'api/admin_faqs_single/$1';
-
-// Admin — settings
-$route['api/admin/settings']             = 'api/admin_settings';
+// Admin — enquiries
+$route['api/admin/enquiries']     = 'api/admin_enquiries_list';
 
 // Blog (public)
 $route['blog']       = 'blog/index';
@@ -110,17 +97,3 @@ $route['admin']                          = 'admin/dashboard';
 $route['admin/login']                    = 'admin/login';
 $route['admin/logout']                   = 'admin/logout';
 $route['admin/dashboard']                = 'admin/dashboard';
-$route['admin/blog']                     = 'admin/blog';
-$route['admin/blog/create']              = 'admin/blog_create';
-$route['admin/blog/store']               = 'admin/blog_store';
-$route['admin/blog/edit/(:num)']         = 'admin/blog_edit/$1';
-$route['admin/blog/update/(:num)']       = 'admin/blog_update/$1';
-$route['admin/blog/delete/(:num)']       = 'admin/blog_delete/$1';
-$route['admin/settings']                 = 'admin/settings';
-$route['admin/settings/save']            = 'admin/settings_save';
-$route['admin/testimonials']             = 'admin/testimonials';
-$route['admin/testimonial/save']         = 'admin/testimonial_save';
-$route['admin/testimonial/delete/(:num)'] = 'admin/testimonial_delete/$1';
-$route['admin/faqs']                     = 'admin/faqs';
-$route['admin/faq/save']                 = 'admin/faq_save';
-$route['admin/faq/delete/(:num)']        = 'admin/faq_delete/$1';

@@ -5,7 +5,6 @@ class Api extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->library('jwt');
         $this->load->model(['Blog_model', 'Settings_model']);
 
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -17,30 +16,6 @@ class Api extends CI_Controller {
     // =========================================================
     //  AUTH
     // =========================================================
-
-    public function auth_login() {
-        $this->_cors();
-        $this->_method('POST');
-
-        $b     = $this->_body();
-        $admin = $this->db->get_where('er_admins', ['username' => $b['username'] ?? ''])->row();
-
-        if (!$admin || !password_verify($b['password'] ?? '', $admin->password)) {
-            $this->_err('Invalid username or password', 401);
-        }
-
-        $token = $this->jwt->issue([
-            'sub'   => $admin->id,
-            'name'  => $admin->name,
-            'email' => $admin->email,
-        ]);
-
-        $this->_ok([
-            'token'      => $token,
-            'expires_in' => 86400,
-            'admin'      => ['id' => $admin->id, 'name' => $admin->name, 'email' => $admin->email],
-        ], 'Login successful');
-    }
 
     public function auth_logout() {
         $this->_cors();
@@ -91,179 +66,49 @@ class Api extends CI_Controller {
     }
 
     // =========================================================
-    //  ADMIN — Blog
+    //  ADMIN — Enquiries
     // =========================================================
 
-    public function admin_blog_list() {
+    public function admin_enquiries_list() {
         $this->_cors();
         $this->_auth();
-        $m = $_SERVER['REQUEST_METHOD'];
 
-        if ($m === 'GET') {
-            $this->_ok($this->Blog_model->get_all());
+        $this->load->library('apiclient');
+        $result = $this->apiclient->get('/public/theme/enquiry');
+        if (!$result['ok']) $this->_err($result['error'] ?? 'Failed to load enquiries', $result['status'] ?: 502);
 
-        } elseif ($m === 'POST') {
-            $b = $this->_body();
-            if (empty($b['title'])) $this->_err('Title is required');
-            $id = $this->Blog_model->insert([
-                'title'    => $b['title'],
-                'excerpt'  => $b['excerpt']  ?? '',
-                'content'  => $b['content']  ?? '',
-                'category' => $b['category'] ?? 'General',
-                'image'    => $b['image']    ?? '',
-                'status'   => $b['status']   ?? 'draft',
-            ]);
-            $this->_ok(['id' => $id], 'Post created', 201);
-
-        } else {
-            $this->_err('Method not allowed', 405);
-        }
-    }
-
-    public function admin_blog_single($id) {
-        $this->_cors();
-        $this->_auth();
-        $m = $_SERVER['REQUEST_METHOD'];
-
-        if ($m === 'GET') {
-            $post = $this->Blog_model->get_by_id($id);
-            if (!$post) $this->_err('Not found', 404);
-            $this->_ok($post);
-
-        } elseif ($m === 'PUT') {
-            $b = $this->_body();
-            $this->Blog_model->update($id, [
-                'title'    => $b['title']    ?? '',
-                'excerpt'  => $b['excerpt']  ?? '',
-                'content'  => $b['content']  ?? '',
-                'category' => $b['category'] ?? 'General',
-                'image'    => $b['image']    ?? '',
-                'status'   => $b['status']   ?? 'draft',
-            ]);
-            $this->_ok([], 'Post updated');
-
-        } elseif ($m === 'DELETE') {
-            $this->Blog_model->delete($id);
-            $this->_ok([], 'Post deleted');
-
-        } else {
-            $this->_err('Method not allowed', 405);
-        }
-    }
-
-    // =========================================================
-    //  ADMIN — Testimonials
-    // =========================================================
-
-    public function admin_testimonials_list() {
-        $this->_cors();
-        $this->_auth();
-        $m = $_SERVER['REQUEST_METHOD'];
-
-        if ($m === 'GET') {
-            $this->_ok($this->db->order_by('sort_order', 'ASC')->get('er_testimonials')->result());
-
-        } elseif ($m === 'POST') {
-            $this->db->insert('er_testimonials', $this->_testi_row($this->_body()));
-            $this->_ok(['id' => $this->db->insert_id()], 'Testimonial created', 201);
-
-        } else {
-            $this->_err('Method not allowed', 405);
-        }
-    }
-
-    public function admin_testimonials_single($id) {
-        $this->_cors();
-        $this->_auth();
-        $m = $_SERVER['REQUEST_METHOD'];
-
-        if ($m === 'PUT') {
-            $this->db->update('er_testimonials', $this->_testi_row($this->_body()), ['id' => $id]);
-            $this->_ok([], 'Updated');
-
-        } elseif ($m === 'DELETE') {
-            $this->db->delete('er_testimonials', ['id' => $id]);
-            $this->_ok([], 'Deleted');
-
-        } else {
-            $this->_err('Method not allowed', 405);
-        }
-    }
-
-    // =========================================================
-    //  ADMIN — FAQs
-    // =========================================================
-
-    public function admin_faqs_list() {
-        $this->_cors();
-        $this->_auth();
-        $m = $_SERVER['REQUEST_METHOD'];
-
-        if ($m === 'GET') {
-            $this->_ok($this->db->order_by('sort_order', 'ASC')->get('er_faqs')->result());
-
-        } elseif ($m === 'POST') {
-            $this->db->insert('er_faqs', $this->_faq_row($this->_body()));
-            $this->_ok(['id' => $this->db->insert_id()], 'FAQ created', 201);
-
-        } else {
-            $this->_err('Method not allowed', 405);
-        }
-    }
-
-    public function admin_faqs_single($id) {
-        $this->_cors();
-        $this->_auth();
-        $m = $_SERVER['REQUEST_METHOD'];
-
-        if ($m === 'PUT') {
-            $this->db->update('er_faqs', $this->_faq_row($this->_body()), ['id' => $id]);
-            $this->_ok([], 'Updated');
-
-        } elseif ($m === 'DELETE') {
-            $this->db->delete('er_faqs', ['id' => $id]);
-            $this->_ok([], 'Deleted');
-
-        } else {
-            $this->_err('Method not allowed', 405);
-        }
-    }
-
-    // =========================================================
-    //  ADMIN — Settings
-    // =========================================================
-
-    public function admin_settings() {
-        $this->_cors();
-        $this->_auth();
-        $m = $_SERVER['REQUEST_METHOD'];
-
-        if ($m === 'GET') {
-            $this->_ok($this->Settings_model->get_all());
-
-        } elseif ($m === 'PUT') {
-            $b       = $this->_body();
-            $allowed = ['site_name','site_phone','site_email','site_address',
-                        'facebook_url','twitter_url','linkedin_url','youtube_url','footer_tagline'];
-            $save = [];
-            foreach ($allowed as $k) { if (isset($b[$k])) $save[$k] = $b[$k]; }
-            $this->Settings_model->save($save);
-            $this->_ok([], 'Settings updated');
-
-        } else {
-            $this->_err('Method not allowed', 405);
-        }
+        $this->_ok($result['body']['results'] ?? []);
     }
 
     // =========================================================
     //  PRIVATE HELPERS
     // =========================================================
 
+    /**
+     * Admin login now issues tokens from the external auth service, so verification
+     * is delegated there too: the local JWT secret can't validate an externally-signed token.
+     */
     private function _auth(): array {
-        $token  = $this->_bearer();
-        $claims = $token ? $this->jwt->verify($token) : null;
-        if (!$claims) $this->_err('Unauthorized — invalid or expired token', 401);
-        return $claims;
+        $token = $this->_bearer();
+        if (!$token) $this->_err('Unauthorized — missing token', 401);
+
+        $parts = explode('.', $token);
+        if (count($parts) !== 3) $this->_err('Unauthorized — invalid token', 401);
+
+        $payload = json_decode(base64_decode(strtr($parts[1], '-_', '+/')), true);
+        if (!is_array($payload)) $this->_err('Unauthorized — invalid token', 401);
+        if (isset($payload['exp']) && $payload['exp'] < time()) $this->_err('Unauthorized — token expired', 401);
+
+        $this->load->library('apiclient');
+        $verify = $this->apiclient->get('/auth/verify_admin_login', [], ['Authorization' => 'Bearer ' . $token]);
+        if (!$verify['ok']) $this->_err('Unauthorized — invalid or expired token', 401);
+
+        return [
+            'sub'   => $payload['id']    ?? null,
+            'name'  => $payload['name']  ?? null,
+            'email' => $payload['email'] ?? null,
+            'role'  => $payload['role']  ?? null,
+        ];
     }
 
     private function _bearer(): ?string {
@@ -273,10 +118,6 @@ class Api extends CI_Controller {
 
     private function _body(): array {
         return json_decode(file_get_contents('php://input'), true) ?? [];
-    }
-
-    private function _method(string $required): void {
-        if ($_SERVER['REQUEST_METHOD'] !== $required) $this->_err('Method not allowed', 405);
     }
 
     private function _cors(): void {
@@ -296,27 +137,5 @@ class Api extends CI_Controller {
         http_response_code($code);
         echo json_encode(['success' => false, 'message' => $message, 'data' => null]);
         exit;
-    }
-
-    private function _testi_row(array $b): array {
-        return [
-            'name'           => $b['name']            ?? '',
-            'org'            => $b['org']              ?? '',
-            'quote'          => $b['quote']            ?? '',
-            'stars'          => (int)($b['stars']      ?? 5),
-            'avatar_initial' => strtoupper(substr($b['name'] ?? 'A', 0, 1)),
-            'avatar_color'   => $b['avatar_color']     ?? '#1a56db',
-            'status'         => $b['status']           ?? 'active',
-            'sort_order'     => (int)($b['sort_order'] ?? 0),
-        ];
-    }
-
-    private function _faq_row(array $b): array {
-        return [
-            'question'   => $b['question']            ?? '',
-            'answer'     => $b['answer']              ?? '',
-            'sort_order' => (int)($b['sort_order']    ?? 0),
-            'status'     => $b['status']              ?? 'active',
-        ];
     }
 }

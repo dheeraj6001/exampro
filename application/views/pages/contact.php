@@ -151,10 +151,12 @@
           </form>
 
           <script>
-          const BASE_API = 'https://api.psofts.com';
+          let isSubmittingEnquiry = false;
 
           document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            if (isSubmittingEnquiry) return;
+            isSubmittingEnquiry = true;
             const form = this;
 
             const successEl = document.getElementById('form-success');
@@ -164,9 +166,10 @@
             const btnLoad   = document.getElementById('btn-loading');
             const submitBtn = document.getElementById('submit-btn');
 
-            // Hide previous feedback
-            successEl.style.display = 'none';
-            errorEl.style.display   = 'none';
+            // Hide previous feedback (!important needed: these use Bootstrap's d-flex,
+            // which ships as `display:flex !important` and would otherwise override a plain inline style)
+            successEl.style.setProperty('display', 'none', 'important');
+            errorEl.style.setProperty('display', 'none', 'important');
 
             // Basic required-field check
             const required = ['first_name', 'last_name', 'email', 'phone', 'org'];
@@ -175,6 +178,7 @@
               if (!el.value.trim()) {
                 el.focus();
                 el.classList.add('is-invalid');
+                isSubmittingEnquiry = false;
                 return;
               }
               el.classList.remove('is-invalid');
@@ -198,33 +202,31 @@
             };
 
             try {
-              const response = await fetch(BASE_API + '/public/enquiry/examappenquiry', {
+              const response = await fetch('<?= base_url('contact/enquiry') ?>', {
                 method:  'POST',
-                headers: {
-                  'Content-Type':   'application/json',
-                  'x-tenant-domain': 'examrankers.com',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
               });
 
               if (response.ok) {
-                successEl.style.display = '';
+                successEl.style.removeProperty('display');
                 form.reset();
                 successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               } else {
                 const result = await response.json().catch(() => ({}));
                 errorMsg.textContent = result.message || 'Submission failed. Please try again.';
-                errorEl.style.display = '';
+                errorEl.style.removeProperty('display');
                 errorEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               }
             } catch (error) {
               errorMsg.textContent = 'Network error: ' + error.message;
-              errorEl.style.display = '';
+              errorEl.style.removeProperty('display');
               errorEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             } finally {
               btnText.style.display = '';
               btnLoad.style.display = 'none';
               submitBtn.disabled    = false;
+              isSubmittingEnquiry   = false;
             }
           });
           </script>

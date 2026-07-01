@@ -12,7 +12,7 @@
     .brand { font-size:1.6rem; font-weight:800; color:#0b1437; }
     .brand span { color:#1a56db; }
     .form-control:focus { border-color:#1a56db; box-shadow:0 0 0 3px rgba(26,86,219,.15); }
-    #err { display:none; }
+    #err { display:none !important; }
   </style>
 </head>
 <body>
@@ -30,10 +30,10 @@
 
     <form id="login-form">
       <div class="mb-3">
-        <label class="form-label fw-semibold small">Username</label>
+        <label class="form-label fw-semibold small">Email</label>
         <div class="input-group">
           <span class="input-group-text bg-light"><i class="bi bi-person text-muted"></i></span>
-          <input type="text" id="username" class="form-control" placeholder="admin" required autofocus>
+          <input type="email" id="email" class="form-control" placeholder="admin@example.com" required autofocus>
         </div>
       </div>
       <div class="mb-4">
@@ -57,7 +57,6 @@
 </div>
 
 <script>
-const API_BASE   = <?= json_encode($api_base) ?>;
 const ADMIN_BASE = <?= json_encode($admin_base) ?>;
 
 // If already logged in, redirect
@@ -68,34 +67,35 @@ if (localStorage.getItem('er_token')) {
 document.getElementById('login-form').addEventListener('submit', async function(e) {
   e.preventDefault();
   const btn = document.getElementById('submit-btn');
+  const errEl = document.getElementById('err');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Signing in…';
-  document.getElementById('err').style.display = 'none';
+  errEl.style.setProperty('display', 'none', 'important');
 
   try {
-    const res = await fetch(API_BASE + 'auth/login', {
+    const res = await fetch(ADMIN_BASE + 'login_submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: document.getElementById('username').value,
+        email:    document.getElementById('email').value,
         password: document.getElementById('password').value,
       }),
     });
     const json = await res.json();
 
     if (json.success) {
-      localStorage.setItem('er_token', json.data.token);
-      localStorage.setItem('er_admin', JSON.stringify(json.data.admin));
+      localStorage.setItem('er_token', json.data.token || '');
+      localStorage.setItem('er_admin', JSON.stringify(json.data.user || {}));
       window.location.href = ADMIN_BASE + 'dashboard';
     } else {
       document.getElementById('err-msg').textContent = json.message || 'Invalid credentials';
-      document.getElementById('err').style.display = 'flex';
+      errEl.style.setProperty('display', 'flex', 'important');
       btn.disabled = false;
       btn.innerHTML = 'Sign In <i class="bi bi-arrow-right ms-1"></i>';
     }
   } catch (err) {
     document.getElementById('err-msg').textContent = 'Network error. Please try again.';
-    document.getElementById('err').style.display = 'flex';
+    errEl.style.removeProperty('display');
     btn.disabled = false;
     btn.innerHTML = 'Sign In <i class="bi bi-arrow-right ms-1"></i>';
   }

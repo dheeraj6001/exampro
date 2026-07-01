@@ -71,12 +71,9 @@ function era($seg, $keys) { return in_array($seg, (array)$keys) ? 'active' : '';
   <a href="<?= $admin_base ?>dashboard"    class="er-link <?= era($seg2,'dashboard') ?>"><i class="bi bi-grid-1x2-fill"></i>Dashboard</a>
 
   <div class="er-sec">Content</div>
-  <a href="<?= $admin_base ?>blog"         class="er-link <?= era($seg2,'blog') ?>"><i class="bi bi-file-earmark-text-fill"></i>Blog Posts</a>
-  <a href="<?= $admin_base ?>testimonials" class="er-link <?= era($seg2,'testimonials') ?>"><i class="bi bi-chat-quote-fill"></i>Testimonials</a>
-  <a href="<?= $admin_base ?>faqs"         class="er-link <?= era($seg2,'faqs') ?>"><i class="bi bi-question-circle-fill"></i>FAQs</a>
+  <a href="<?= $admin_base ?>enquiries"    class="er-link <?= era($seg2,'enquiries') ?>"><i class="bi bi-inbox-fill"></i>Enquiries</a>
 
   <div class="er-sec">System</div>
-  <a href="<?= $admin_base ?>settings"     class="er-link <?= era($seg2,'settings') ?>"><i class="bi bi-gear-fill"></i>Site Settings</a>
   <a href="<?= $site_base ?>"   target="_blank" class="er-link"><i class="bi bi-box-arrow-up-right"></i>View Website</a>
   <a href="#" onclick="ER.logout();return false;" class="er-link red"><i class="bi bi-box-arrow-left"></i>Logout</a>
 
